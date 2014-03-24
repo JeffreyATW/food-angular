@@ -12,7 +12,7 @@ angular.module('foodApp')
           compartments = compartmentsResponse.data;
           return $http.get('/ingredients.json');
         }).then(function (ingredientsResponse) {
-          deferred.resolve({compartments: compartments, ingredients: ingredientsResponse.data});
+          deferred.resolve();
           $rootScope.compartments = compartments;
           $rootScope.ingredients = ingredientsResponse.data;
         });

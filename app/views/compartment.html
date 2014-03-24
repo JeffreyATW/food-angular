@@ -1,0 +1,20 @@
+<h2>{{compartment.name}} <small><button class="btn btn-link" ng-click="editing = !editing">{{editing ? "Done" : "Edit"}}</button></small></h2>
+<form novalidate ng-show="editing">
+  <input class="form-control" ng-model="compartment.name">
+</form>
+
+<h3>Ingredients</h3>
+<table class="table table-striped">
+  <tr ng-repeat="ingredient in ingredients | filter: {compartment: compartment.id}">
+    <td><a ng-href="#/ingredients/{{ingredient.id}}">{{ingredient.name}}</a></td>
+  </tr>
+</table>
+
+<h3>New Ingredient</h3>
+<form name="newIngredientForm" novalidate>
+  <div class="form-group">
+    <label for="newIngredientName">Name</label>
+    <input id="newIngredientName" class="form-control" type="text" ng-model="newIngredient.name" required>
+  </div>
+  <input class="btn btn-primary" type="submit" ng-click="addIngredient(newIngredient)" ng-disabled="newIngredientForm.$invalid">
+</form>

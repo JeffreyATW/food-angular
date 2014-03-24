@@ -1,1 +1,10 @@
-<h2>{{ingredient.name}}</h2>
+<h2>{{ingredient.name}} <small><button class="btn btn-link" ng-click="editing = !editing">{{editing ? "Done" : "Edit"}}</button></small></h2>
+
+<form name="ingredientForm" novalidate ng-show="editing">
+  <div class="form-group">
+    <input type="text" ng-model="ingredient.name">
+  </div>
+  <select ng-model="ingredient.compartment" required>
+    <option ng-repeat="compartment in compartments" value="{{compartment.id}}" ng-selected="{{ingredient.compartment == compartment.id}}">{{compartment.name}}</option>
+  </select>
+</form>

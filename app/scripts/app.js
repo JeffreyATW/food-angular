@@ -24,6 +24,11 @@ angular.module('foodApp', [
         controller: 'IngredientCtrl',
         resolve: resolve
       })
+      .when('/compartments/:compartmentId', {
+        templateUrl: 'views/compartment.html',
+        controller: 'CompartmentCtrl',
+        resolve: resolve
+      })
       .otherwise({
         redirectTo: '/'
       });

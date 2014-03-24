@@ -1,16 +1,23 @@
-<input type="search" ng-model="searchText">
-
-<table>
-  <tr ng-repeat="ingredient in ingredients | filter: searchText">
+<h3>Ingredients</h3>
+<input class="form-control" type="search" ng-model="searchText" placeholder="Search">
+<table class="table table-striped">
+  <tr ng-repeat="ingredient in ingredients | filter: searchText" ng-init="compartment = (compartments | getById: ingredient.compartment)">
     <td><a ng-href="#/ingredients/{{ingredient.id}}">{{ingredient.name}}</a></td>
-    <td>{{compartments | getById: ingredient.compartment | attribute: 'name' }}</td>
+    <td><a ng-href="#/compartments/{{compartment.id}}">{{compartment.name}}</a></td>
   </tr>
 </table>
 
+<h3>New Ingredient</h3>
 <form name="newIngredientForm" novalidate>
-  <input type="text" ng-model="newIngredient.name" required>
-  <select ng-model="newIngredient.compartment" required>
-    <option ng-repeat="compartment in compartments" value="{{compartment.id}}">{{compartment.name}}</option>
-  </select>
+  <div class="form-group">
+    <label for="newIngredientName">Name</label>
+    <input class="form-control" id="newIngredientName" type="text" ng-model="newIngredient.name" required>
+  </div>
+  <div class="form-group">
+    <label for="newIngredientCompartment">Compartment</label>
+    <select id="newIngredientCompartment" class="form-control" ng-model="newIngredient.compartment" required>
+      <option ng-repeat="compartment in compartments" value="{{compartment.id}}">{{compartment.name}}</option>
+    </select>
+  </div>
   <input class="btn btn-primary" type="submit" ng-click="addIngredient(newIngredient)" ng-disabled="newIngredientForm.$invalid">
 </form>
